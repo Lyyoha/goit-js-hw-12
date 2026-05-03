@@ -34,3 +34,27 @@
 
   max-width: 1200px;
 }
+.hidden {
+  display: none;
+}
+.load-more {
+  display: block;
+  margin: 32px auto 0;
+  padding: 12px 28px;
+  background-color: #4e75ff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-more:hover {
+  background-color: #6c8cff;
+}
+
+.is-hidden {
+  display: none;
+}

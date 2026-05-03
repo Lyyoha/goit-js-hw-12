@@ -1,16 +1,13 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const gallery = document.querySelector('.gallery');
-const loader = document.querySelector('.loader');
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
-export function createGalleryTemplate(images) {
-  return images
+export const createGallery = images => {
+  const html = images
     .map(
       ({
         webformatURL,
@@ -23,33 +20,34 @@ export function createGalleryTemplate(images) {
       }) => `
       <li class="gallery-item">
         <a href="${largeImageURL}">
-          <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+          <img src="${webformatURL}" alt="${tags}" />
         </a>
         <div class="info">
-          <p><b>Likes</b> ${likes}</p>
-          <p><b>Views</b> ${views}</p>
-          <p><b>Comments</b> ${comments}</p>
-          <p><b>Downloads</b> ${downloads}</p>
+          <p><span>Likes</span><span>${likes}</span></p>
+          <p><span>Views</span><span>${views}</span></p>
+          <p><span>Comments</span><span>${comments}</span></p>
+          <p><span>Downloads</span><span>${downloads}</span></p>
         </div>
       </li>`
     )
     .join('');
-}
 
-export function createGallery(images) {
-  const markup = createGalleryTemplate(images);
-  gallery.innerHTML = markup;
+  document.querySelector('.gallery').insertAdjacentHTML('beforeend', html);
   lightbox.refresh();
-}
+};
 
-export function clearGallery() {
-  gallery.innerHTML = '';
-}
-
-export function showLoader() {
-  loader.classList.add('visible');
-}
-
-export function hideLoader() {
-  loader.classList.remove('visible');
-}
+export const clearGallery = () => {
+  document.querySelector('.gallery').innerHTML = '';
+};
+export const showLoader = () => {
+  document.querySelector('.loader').classList.add('visible');
+};
+export const hideLoader = () => {
+  document.querySelector('.loader').classList.remove('visible');
+};
+export const showLoadMoreButton = () => {
+  document.querySelector('.load-more').classList.remove('is-hidden');
+};
+export const hideLoadMoreButton = () => {
+  document.querySelector('.load-more').classList.add('is-hidden');
+};
